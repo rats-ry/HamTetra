@@ -8,3 +8,4 @@ cd ../suoapp
 make -j4
 echo "\033[1;33mBuilt suo\033[0m"
 #sudo make install
+#echo "\033[1;33mInstalled suo\033[0m"

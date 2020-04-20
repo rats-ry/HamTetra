@@ -1,5 +1,6 @@
 #!/bin/sh
-git pull --recurse-submodules
+git submodule init
+git submodule update
 install/install_limesdr.sh
 install/install_suo_deps.sh
 install/build_liquiddsp.sh

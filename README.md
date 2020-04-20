@@ -14,9 +14,10 @@ Due to the lack of full duplex and/or transmit timestamp support, devices such a
 Recommended operating system is Ubuntu Linux running on any laptop, server or desktop computer. Single-board computers running Armbian can be used as well. Windows port seems to be possible but not supported yet. Several other platforms may work but have not been tested.
 
 
-## Installation
+## Installation for LimeSDR on Ubuntu
 
-Take a fresh installation or a container based on Ubuntu 18.04 and do:
+If you haven't installed SDR drivers, SoapySDR or anything yet,
+take a fresh installation or a container based on Ubuntu 18.04 and do:
 
     sudo apt install git
     cd
@@ -25,6 +26,25 @@ Take a fresh installation or a container based on Ubuntu 18.04 and do:
     install/everything.sh
 
 The installation will occasionally ask for your password in order to use sudo.
-If you don't like the installation script, it fails for some reason or if you
-want to experiment with other platforms, feel free to do the installation
-steps manually. 
+
+If you have installed SDR drivers already or want to experiment with different
+platforms, consider running the installation steps manually or running only
+part of the installation scripts instead of running `everything.sh`.
+
+For example, to install only Suo in case SoapySDR has already been installed:
+
+    git submodule init
+    git submodule update
+    install/install_suo_deps.sh
+    install/build_liquiddsp.h
+    install/build_suo.sh
+
+
+## Running it
+
+To transmit a DMO repeater signal, start these two programs in different
+terminals:
+
+    suo/suoapp/build/suo tetra/inarinet-config.txt
+
+    osmo-tetra-dmo/src/tetra-dmo-rep

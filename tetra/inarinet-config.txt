@@ -1,0 +1,30 @@
+burst_dpsk_receiver
+centerfreq 37500
+samplerate 250000
+-
+basic_decoder
+bypass 1
+-
+zmq_output
+
+-
+psk_transmitter
+centerfreq 37500
+samplerate 250000
+-
+basic_encoder
+bypass 1
+-
+zmq_input
+
+-
+soapysdr_io
+soapy-driver lime
+samplerate 250000
+rx_centerfreq 416.2e6
+tx_centerfreq 416.2e6
+rx_antenna LNAL
+tx_antenna BAND1
+rx_gain 50
+tx_gain 50
+-
