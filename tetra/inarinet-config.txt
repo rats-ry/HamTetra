@@ -1,30 +1,50 @@
 burst_dpsk_receiver
+# Tune the receiver somewhat away from the SDR center frequency
+# to avoid 1/f noise and DC
 centerfreq 37500
-samplerate 250000
+samplerate 500000
 -
-basic_decoder
-bypass 1
+none
+# With no decoder selected, soft bits from the receiver
+# are sent straight to ZeroMQ
 -
 zmq_output
-
+address ipc:///tmp/dpsk-modem-rx
+address_tick ipc:///tmp/dpsk-modem-rx-tick
 -
 psk_transmitter
 centerfreq 37500
-samplerate 250000
+samplerate 500000
 -
-basic_encoder
-bypass 1
+none
+# With no encoder selected, bits from ZeroMQ go straight to transmitter
 -
 zmq_input
-
+address ipc:///tmp/dpsk-modem-tx
+address_tick ipc:///tmp/dpsk-modem-tx-tick
 -
 soapysdr_io
 soapy-driver lime
-samplerate 250000
+
+# If sample rate is changed, remember to change it
+# also for receiver and transmitter
+samplerate 500000
+
 rx_centerfreq 416.2e6
 tx_centerfreq 416.2e6
 rx_antenna LNAL
 tx_antenna BAND1
 rx_gain 50
 tx_gain 50
+
+# Even with the performance-latency parameter set to 0 (low latency),
+# LimeSDR seems to deliver samples in packets of 1024.
+# Setting a smaller buffer size will cause samples to arrive
+# in bursts of some 1024 samples.
+# So, using a buffer smaller than that won't reduce RX latency much.
+buffer 1024
+
+# tx_latency should be at least 2 times, maybe about 4 times buffer size.
+# Let's try 3 times it.
+tx_latency 3072
 -
