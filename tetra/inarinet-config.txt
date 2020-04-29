@@ -3,6 +3,7 @@ burst_dpsk_receiver
 # to avoid 1/f noise and DC
 centerfreq 37500
 samplerate 500000
+syncpos 143
 -
 none
 # With no decoder selected, soft bits from the receiver
@@ -45,6 +46,7 @@ tx_gain 50
 buffer 1024
 
 # tx_latency should be at least 2 times, maybe about 4 times buffer size.
-# Let's try 3 times it.
-tx_latency 3072
+# 3 times it wasn't reliable for everyone with these settings,
+# so let's try doubling it to 6 times the buffer size.
+tx_latency 6144
 -

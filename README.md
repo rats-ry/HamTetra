@@ -13,14 +13,15 @@ pulled in here as git submodules.
 Supported radios are those providing a SoapySDR module, full duplex capability
 and timestamp support. This includes at least the LimeSDR, LimeSDR Mini, XTRX,
 BladeRF and various USRP models. Most experimentation so far has happened on
-LimeSDR, so that's recommended.
+various LimeSDR models, so that's recommended.
 
 Due to the lack of full duplex and/or transmit timestamp support, devices such
 as ADALM-PLUTO and HackRF are not guaranteed to work properly. Some support
 for these is possible in the future.
 
 Recommended operating system is Ubuntu Linux running on any laptop, server or
-desktop computer. Single-board computers running Armbian can be used as well.
+desktop computer. Raspberry Pi 3 or 4 running Raspbian or other single-board
+computers running Armbian can be used as well.
 Several other platforms may work but have not been tested.
 
 
@@ -55,9 +56,10 @@ equivalent packages for the dependencies and install them manually.
 
 ## Running it
 
-To transmit a DMO repeater presence signal, start these two programs in
-different terminals:
+To transmit a DMO repeater presence signal, start:
 
-    suo/suoapp/build/suo tetra/inarinet-config.txt
+    osmo-tetra-dmo/src/hamtetra_main2
 
-    osmo-tetra-dmo/src/hamtetra_main
+It should print a help for command line parameters. Fill in your SDR hardware
+and TETRA frequency and it should start transmitting. If changes to some other
+configuration is needed, edit the source code.
