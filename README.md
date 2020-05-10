@@ -53,13 +53,33 @@ The installation scripts will occasionally ask for your password in order to
 use sudo. On distributions other than Ubuntu or Debian, try to find the
 equivalent packages for the dependencies and install them manually.
 
+If you just installed LimeSuite, it's a good idea to make sure the
+LimeSDR firmware and gateware versions are up to date. Do:
+
+    LimeUtil --update
 
 ## Running it
 
-To transmit a DMO repeater presence signal, start:
+To run a DMO repeater, start:
 
     osmo-tetra-dmo/src/hamtetra_main2
 
 It should print a help for command line parameters. Fill in your SDR hardware
 and TETRA frequency and it should start transmitting. If changes to some other
 configuration is needed, edit the source code.
+
+## Alternative platforms
+
+So, LimeSDR is too expensive or you can't wait for one to arrive?
+No worries! There's also some experimental support for
+[traditional sound-card based SDRs](https://www.sm5bsz.com/linuxdsp/hware/sbl1.htm).
+Depending on your hardware, it may or may not work properly.
+ALSA `snd_pcm_link` call is used to synchronize record and playback streams,
+which seemed to work well enough on one tested motherboard integrated
+sound chip, but not so well on one tested USB sound card.
+
+Connect Line Out and Line In to I/Q mixers, use some signal generator as a
+local oscillator and tune it 12 kHz below the desired center frequency.
+Start something like `./hamtetra_main2 alsa:hw:0,0 0` and use `alsamixer -c 0`
+to adjust the mixer settings. Replace `hw:0,0` and `-c 0` with the correct
+sound card number if needed.
