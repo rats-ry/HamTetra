@@ -3,7 +3,7 @@
 	url = git://git.osmocom.org/libosmocore.git
 [submodule "osmo-tetra-dmo"]
 	path = osmo-tetra-dmo
-	url = https://github.com/lkurkela/osmo-tetra-dmo.git
+	url = https://github.com/tejeez/osmo-tetra-dmo.git
 [submodule "suo"]
 	path = suo
 	url = https://github.com/tejeez/suo.git
