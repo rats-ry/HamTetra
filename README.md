@@ -11,19 +11,54 @@ pulled in here as git submodules.
 ## Supported platforms
 
 Supported radios are those providing a SoapySDR module, full duplex capability
-and timestamp support. This includes at least the LimeSDR, LimeSDR Mini, XTRX,
+and timestamp support. This includes at least the LimeSDR, LimeSDR Mini,
+[SXceiver](https://sxceiver.com/), XTRX,
 BladeRF and various USRP models. Most experimentation so far has happened on
 various LimeSDR models, so that's recommended.
 
 Due to the lack of full duplex and/or transmit timestamp support, devices such
-as ADALM-PLUTO and HackRF are not guaranteed to work properly. Some support
-for these is possible in the future.
+as ADALM-PLUTO and HackRF are not guaranteed to work properly.
 
 Recommended operating system is Ubuntu Linux running on any laptop, server or
-desktop computer. Raspberry Pi 3 or 4 running Raspbian or other single-board
-computers running Armbian can be used as well.
+desktop computer. Raspberry Pi 3 or 4 running Raspberry Pi OS or other
+single-board computers running Armbian can be used as well.
 Several other platforms may work but have not been tested.
 
+## Installation for SXceiver on Raspberry Pi OS
+
+Tested on Raspberry Pi OS version 12.
+
+Install the SXceiver driver module (SoapySX).
+This can be skipped if you have already installed the latest version.
+
+    sudo apt-get install -y --no-install-recommends git make g++ cmake libsoapysdr-dev libasound2-dev libgpiod-dev
+    cd
+    git clone "https://github.com/tejeez/sxxcvr.git"
+    cd sxxcvr/SoapySX
+    mkdir build
+    cd build
+    cmake ..
+    make
+    sudo make install
+    sudo ldconfig
+    # Only needed on desktop systems running PipeWire:
+    systemctl --user restart wireplumber
+
+Install the rest:
+
+    cd
+    git clone https://github.com/OH2NXX/HamTetra.git
+    cd HamTetra
+    git submodule init
+    git submodule update
+     
+    install/suo_dependencies.sh
+    install/build_liquiddsp.sh
+    install/build_suo.sh
+     
+    install/osmo_dependencies.sh
+    install/build_osmocore.sh
+    install/build_osmotetra.sh
 
 ## Installation for LimeSDR on Ubuntu
 
