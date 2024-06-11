@@ -1,6 +1,6 @@
 [submodule "libosmocore"]
 	path = libosmocore
-	url = git://git.osmocom.org/libosmocore.git
+	url = https://gitea.osmocom.org/osmocom/libosmocore.git
 [submodule "osmo-tetra-dmo"]
 	path = osmo-tetra-dmo
 	url = https://github.com/tejeez/osmo-tetra-dmo.git
